@@ -15,4 +15,6 @@ game.play()
 """
 
 fenêtre = View.MainView()
-fenêtre.mainloop()
+while 1:
+    fenêtre.update()
+#fenêtre.mainloop()
