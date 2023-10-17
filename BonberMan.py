@@ -1,1 +1,4 @@
-print("hello Word")
+from View import *
+
+game = MainView()
+game.play()
