@@ -1,5 +1,5 @@
 import View
-import Controler
+import Controller
 import Model
 
 """

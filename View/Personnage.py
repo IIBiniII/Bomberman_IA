@@ -1,5 +1,6 @@
 from tkinter import *
 import keyboard as kb
+from View import Bomb
 
 class Player(Canvas) : 
     def __init__(self,master,name:str,w,h)->None:
@@ -11,6 +12,7 @@ class Player(Canvas) :
         self.posX = 5
         self.posY = 5
         self.name = name
+        self.master = master
         #Init of bonuses
         self.fire_range = 3
         self.fire_bonus = 0
@@ -48,11 +50,14 @@ class Player(Canvas) :
 
     def moveif(self):
         
-        if kb.is_pressed("q"):
+        if kb.is_pressed("q") or kb.is_pressed("left"):
             self.move_left()
-        if kb.is_pressed("d"):
+        if kb.is_pressed("d") or kb.is_pressed("right"):
             self.move_right()
-        if kb.is_pressed("z"):
+        if kb.is_pressed("z") or kb.is_pressed("up"):
             self.move_top()
-        if kb.is_pressed("s"):
+        if kb.is_pressed("s") or kb.is_pressed("down"):
             self.move_bottom()
+        if kb.is_pressed("space"):
+            Bomb(self,self.posX+20,self.posY+10,10,10)
+            #TODO Ajouter vérification nb bombes posé (et 1 à la fois)

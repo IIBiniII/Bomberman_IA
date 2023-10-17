@@ -11,6 +11,8 @@ class MainView(Tk):
         self.protocol("WM_DELETE_WINDOW", self.stop)
 
         self.page = View.Menu(self)
+        self.configure(bg="light blue")
+
         self.history = [self.page]
 
         self.page.pack()
