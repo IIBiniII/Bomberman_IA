@@ -7,6 +7,9 @@ class MainView(Tk):
         
         super().__init__()
         self.geometry("500x500")
+        self.runing = True
+        self.protocol("WM_DELETE_WINDOW", self.stop)
+
         self.page = View.Menu(self)
         self.history = [self.page]
 
@@ -24,8 +27,11 @@ class MainView(Tk):
         self.page = pannel
         self.page.pack()
 
+    def stop(self):
+        self.runing = False
+    
     def start(self):
-        while 1:
+        while self.runing:
             if type(self.page) is View.Game:
                 self.page.player.moveif()
             self.update()

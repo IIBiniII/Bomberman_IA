@@ -2,12 +2,12 @@ from tkinter import *
 import keyboard as kb
 
 class Player(Canvas) : 
-    def __init__(self,master,name:str)->None:
+    def __init__(self,master,name:str,w,h)->None:
 
-        super().__init__(master,highlightbackground="red", highlightthickness=2)
+        super().__init__(master,width=w,height=h,highlightbackground="red", highlightthickness=2)
         #highlightbackground="blue", highlightthickness=2
 
-        self.speed = 0.5
+        self.speed = 0.05
         self.posX = 5
         self.posY = 5
         self.name = name
@@ -31,16 +31,20 @@ class Player(Canvas) :
         self.move(self.rect, x, y)
         
     def move_left(self):
-        self.move_to(-self.speed)
+        if self.posX -self.speed > 0:
+            self.move_to(-self.speed)
     
     def move_right(self):
-        self.move_to(self.speed)
+        if self.posX +self.speed < self.winfo_width()-20:
+            self.move_to(self.speed)
 
     def move_top(self):
-        self.move_to(y=-self.speed)
+        if self.posY -self.speed > 0:
+            self.move_to(y=-self.speed)
 
     def move_bottom(self):
-        self.move_to(y=self.speed)
+        if self.posY +self.speed < self.winfo_height()-20:
+            self.move_to(y=self.speed)
 
     def moveif(self):
         
