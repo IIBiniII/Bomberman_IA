@@ -7,7 +7,7 @@ class Player(Canvas) :
         super().__init__(master,highlightbackground="red", highlightthickness=2)
         #highlightbackground="blue", highlightthickness=2
 
-        self.speed = 1
+        self.speed = 0.5
         self.posX = 5
         self.posY = 5
         self.name = name
@@ -52,14 +52,3 @@ class Player(Canvas) :
             self.move_top()
         if kb.is_pressed("s"):
             self.move_bottom()
-
-        """
-        if kb.is_pressed("z"):
-            self.move_left()
-        if kb.is_pressed("s"):
-            self.move_right()
-        if kb.is_pressed("q"):
-            self.move_top()
-        if kb.is_pressed("d"):
-            self.move_bottom()
-        """
