@@ -23,3 +23,9 @@ class MainView(Tk):
         self.history.append(self.page)
         self.page = pannel
         self.page.pack()
+
+    def start(self):
+        while 1:
+            if type(self.page) is View.Game:
+                self.page.player.moveif()
+            self.update()

@@ -7,6 +7,6 @@ class Game(Frame):
     def __init__(self,master):
         super().__init__(master)
 
-        player = Player(self,"player 1")
-        player.pack()#place(x=10,y=10)
+        self.player = Player(self,"player 1")
+        self.player.pack()#place(x=10,y=10)
     

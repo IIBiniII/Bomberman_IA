@@ -14,7 +14,6 @@ game.add_player(player1)
 game.play()
 """
 
-fenêtre = View.MainView()
-while 1:
-    fenêtre.update()
-#fenêtre.mainloop()
+fenetre = View.MainView()
+fenetre.start()
+#fenetre.mainloop()
