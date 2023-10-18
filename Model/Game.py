@@ -1,4 +1,4 @@
-from View import Player
+from Model.Personnage import Player
 from Model.Map import Map
 from Model.Box import Box
 
