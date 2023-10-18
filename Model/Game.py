@@ -1,6 +1,6 @@
 from View import Player
 from Model.Map import Map
-from View.Box import Box
+from Model.Box import Box
 
 
 
@@ -11,13 +11,15 @@ class Game: #Classe pour une Partie
         
         self.players = [Player("player 1")]
         self.map :Map = Map()
+        self.map.placerCaisse()
 
         self.boxes = []
         for y in range(len(self.map.Carte)):
             for x in range(len(self.map.Carte[y])) :
-                if self.map.Carte[y][x]:
-                    print(x,y)
-                    self.boxes.append(Box(x,y))
+                if self.map.Carte[y][x] == 2:
+                    self.boxes.append(Box(x,y,True))
+                if self.map.Carte[y][x] == 0:
+                    self.boxes.append(Box(x,y,False))
                     
 
     def add_player(self,ply:Player): 

@@ -1,4 +1,4 @@
-from View import Player
+from Model import Player
 from Model.Game import Game
 
 import pygame
@@ -11,13 +11,17 @@ class GameView(): #Classe pour une Partie
         self.window_height = 500
         self.window_width = 500
         self.window = pygame.display.set_mode((self.window_width,self.window_height))
-        self.background = pygame.image.load("View/background.jpg")
+        self.background = pygame.image.load("Assets/background.jpg")
         self.background = pygame.transform.scale(self.background, (self.window_width,self.window_height))
 
         pygame.display.set_caption("Ma Fenêtre Pygame")
 
-        self.box_image = pygame.image.load('View/Box.png')
+        self.box_image = pygame.image.load('Assets/Box.png')
         self.box_image = pygame.transform.scale(self.box_image, (465/15,465/15))
+
+        self.box_image_incassable = pygame.image.load('Assets/BoxIncassable.png')
+        self.box_image_incassable = pygame.transform.scale(self.box_image_incassable, (465/15,465/15))
+
 
         self.game : Game = Game() #Permettera de changer la partie affiché
 
@@ -64,6 +68,9 @@ class GameView(): #Classe pour une Partie
     def update_boxes(self):
         for box in self.game.boxes:
             if not box.broken : 
-                self.window.blit(self.box_image, (box.x*(465/15),box.y*(465/15)))
+                if not box.canBroke:
+                    self.window.blit(self.box_image_incassable, (box.x*(465/15) +17,box.y*(465/15)+17))
+                else :
+                    self.window.blit(self.box_image, (box.x*(465/15)+17,box.y*(465/15)+17))
 
 

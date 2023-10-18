@@ -20,7 +20,7 @@ class Map:
                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                     ]
     
-    def placerCaise(self):
+    def placerCaisse(self):
         for nul in range(len(self.Carte)):
             for nuc in range(len(self.Carte[nul])):
                 if self.Carte[nul][nuc] == 1 and randint(0,100) <= 60:
@@ -30,7 +30,7 @@ class Map:
 
 
 
-    def affichier(self):
+    def afficher(self):
         
         text = ""
 
@@ -49,5 +49,5 @@ class Map:
 
 
 m = Map()
-m.placerCaise()
-m.affichier()
+m.placerCaisse()
+m.afficher()
