@@ -1,4 +1,4 @@
-from View import Game
+from View import GameView
 
 class ControleurPlayBoutonMenu:
 
@@ -6,5 +6,5 @@ class ControleurPlayBoutonMenu:
         self.view = View
 
     def onAction(self,event):
-
-        self.view.goTo(Game(self.view))
+        #self.view.goTo(Game(self.view)) # --> Remplacer par la vue d'option suivante
+        self.view.game = GameView()

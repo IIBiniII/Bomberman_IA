@@ -1,6 +1,8 @@
 from tkinter import *
 import View
-class MainView(Tk):
+from View import GameView
+
+class OptionView(Tk):
 
 
     def __init__(self) -> None:
@@ -8,6 +10,7 @@ class MainView(Tk):
         super().__init__()
         self.geometry("500x500")
         self.runing = True
+        self.game : GameView = None
         self.protocol("WM_DELETE_WINDOW", self.stop)
 
         self.page = View.Menu(self)
@@ -34,6 +37,8 @@ class MainView(Tk):
     
     def start(self):
         while self.runing:
-            if type(self.page) is View.Game:
-                self.page.player.moveif()
+            if self.game != None:
+                if not self.game.update() : #Effectue l'update + vérifie si on a quitté la page
+                    self.game.stop()
+                    #TODO Afficher sur l'optionView que la partie s'est arrêté 
             self.update()

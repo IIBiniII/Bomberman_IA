@@ -1,60 +1,42 @@
-from View import *
-from View.Button import Button
+from View import Player
+from Model.Game import Game
+
 import pygame
-from View.Personnage import *
 
 
-
-class OptionView:
-
-    def __init__(self) -> None:
-        print(pygame.version)
+class GameView(): #Classe pour une Partie
+    
+    def __init__(self):
         pygame.init()
         self.window_height = 300
         self.window_width = 300
         self.window = pygame.display.set_mode((self.window_width,self.window_height))
-        self.background = pygame.image.load("background.jpg")
-        self.player = []
-        self.clock = pygame.time.Clock()
-        #pygame.display.set_caption("Ma Fenêtre Pygame")
+        self.background = pygame.image.load("View/background.jpg")
+        pygame.display.set_caption("Ma Fenêtre Pygame")
 
-        self.bouton = Button(self.window,"ok",(30,30),60,60)
+        self.game : Game = Game() #Permettera de changer la partie affiché
 
+    def update(self): 
         
-    def play(self):
-        running = True
-        while running : 
-            ##event
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse = pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False
+        self.clear()
+        self.update_player()
+        pygame.display.update()
+        return True
 
-
-
-            ##draw
-            self.bouton.draw()
-                    
-            pygame.display.update()
-            self.clock.tick(60)
-
-            self.clear()
-            self.update_player()
-            pygame.display.update()
-            
     def stop(self):
         pygame.quit()
 
     def add_player(self,ply:Player): 
-         self.player.append(ply)
+         self.players.append(ply)
     
     def clear(self):
         self.window.blit(self.background, (0, 0))
 
     def update_player(self):
-        for player in self.player:
+        for player in self.game.players:
                 police = pygame.font.SysFont("Arial",10)
                 text = police.render(player.name,True,"black")
                 self.window.blit(text,(player.posX - 10 ,player.posY - 20))
