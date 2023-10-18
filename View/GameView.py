@@ -47,24 +47,40 @@ class GameView(): #Classe pour une Partie
 
     def update_player(self):
         for player in self.game.players:
+                print(self.player_case(player))
                 police = pygame.font.SysFont("Arial",10)
                 text = police.render(player.name,True,"black")
                 self.window.blit(text,(player.posX - 10 ,player.posY - 20))
-                pygame.draw.circle(self.window,pygame.color.Color(0,0,0),(player.posX,player.posY),5,3)
+                pygame.draw.circle(self.window,pygame.color.Color(0,200,50),(player.posX,player.posY),5,3)
                 keys = pygame.key.get_pressed()
+
+                case_x,case_y = self.player_case(player) #Récupére les coordonés de la case actuel du joueur
                 if keys[pygame.K_z]:
                     if player.posY>0:
-                        player.moveTo(0,-player.speed)
+                        if case_y -player.speed > 0 and self.game.map.Carte[case_y-1][case_x] in [0,2]:
+                            if player.posY > case_y*(465/15)+17 :
+                                player.moveTo(0,-player.speed)
                 if keys[pygame.K_s]:
                     if player.posY<=self.window_height:
-                        player.moveTo(0,player.speed)
+                        if case_y < 15 and self.game.map.Carte[case_y+1][case_x] in [0,2]:
+                            if player.posY+player.speed < (case_y+1)*(465/15) +17 :
+                                player.moveTo(0,player.speed)
                 if keys[pygame.K_q]:
                     if player.posX>0:
-                        player.moveTo(-player.speed,0)
+                        if case_x > 0 and self.game.map.Carte[case_y][case_x-1] in [0,2]:
+                            if player.posX-player.speed > case_x*(465/15)+17 :
+                                player.moveTo(-player.speed,0)
+                    
                 if keys[pygame.K_d]:
                     if player.posX<=self.window_width:
-                        player.moveTo(player.speed,0)
+                        if case_x < 15 and self.game.map.Carte[case_y][case_x+1] in [0,2]:
+                            if player.posX +player.speed < (case_x+1)*(465/15) +17 :
+                                player.moveTo(player.speed,0)
 
+    
+    def player_case(self,player:Player)->(int,int) :
+        x,y= (player.posX-17)//(465/15),(player.posY-17)//(465/15)
+        return int(x),int(y)
     def update_boxes(self):
         for box in self.game.boxes:
             if not box.broken : 

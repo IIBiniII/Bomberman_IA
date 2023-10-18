@@ -47,7 +47,8 @@ class Map:
         
         print(text)
 
-
+"""
 m = Map()
 m.placerCaisse()
 m.afficher()
+"""

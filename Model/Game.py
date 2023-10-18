@@ -16,6 +16,7 @@ class Game: #Classe pour une Partie
                     self.boxes.append(Box(x,y,True))
                 if self.map.Carte[y][x] == 0:
                     self.boxes.append(Box(x,y,False))
+        
                     
 
     def add_player(self,ply:Player): 
