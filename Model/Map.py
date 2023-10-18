@@ -3,7 +3,7 @@ from random import randint
 class Map:
 
     def __init__(self) -> None:
-        
+        # 0 = mure (incasable) :: 1 = sol :: 2 Caise
         self.Carte = [
                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                      [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
