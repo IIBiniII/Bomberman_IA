@@ -10,7 +10,7 @@ class ControleurPlayBoutonMenu(MainControleur):
     def __init__(self,View) -> None:
         self.view = View
 
-    def onAction(self,event):
+    def OnAction(self,event):
 
         if not MainControleur.Model.gameRuning:
             self.view.game = GameView()

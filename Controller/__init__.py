@@ -1,3 +1,4 @@
 from Controller.MainControleur import MainControleur
 
+from Controller.ControleurEntrainementIABouton import ControleurEntrainementIABouton
 from Controller.ControleurPlayBoutonMenu import ControleurPlayBoutonMenu
