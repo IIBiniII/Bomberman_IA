@@ -17,3 +17,5 @@ class Menu(Frame):
         # Utilise grid pour centrer le bouton en X et en Y
         self.boutonPlay.grid(row=0, column=0, padx=5, pady=5, sticky="nsew")
         self.pack()
+
+

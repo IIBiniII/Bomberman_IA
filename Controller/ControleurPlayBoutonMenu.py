@@ -1,10 +1,19 @@
 from View import GameView
+from Model import BomberManModel
 
-class ControleurPlayBoutonMenu:
+from Controller import *
+
+class ControleurPlayBoutonMenu(MainControleur):
+
+    
 
     def __init__(self,View) -> None:
         self.view = View
 
     def onAction(self,event):
-        #self.view.goTo(Game(self.view)) # --> Remplacer par la vue d'option suivante
-        self.view.game = GameView()
+
+        if not MainControleur.Model.gameRuning:
+            self.view.game = GameView()
+            MainControleur.Model.gameRuning = True
+        else:
+            print("une partie est déja lancer")

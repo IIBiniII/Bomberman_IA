@@ -1,1 +1,3 @@
+from Controller.MainControleur import MainControleur
+
 from Controller.ControleurPlayBoutonMenu import ControleurPlayBoutonMenu

@@ -1,8 +1,4 @@
-from Model.Personnage import Player
-from Model.Map import Map
-from Model.Box import Box
-
-
+from Model import *
 
 
 class Game: #Classe pour une Partie

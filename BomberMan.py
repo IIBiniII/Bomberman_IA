@@ -1,6 +1,6 @@
 import View
 import Controller
-import Model
+from Model.BomberManModel import BomberManModel
 
 """
 from os import environ
@@ -13,6 +13,10 @@ player1 = Player("Bertrand")
 game.add_player(player1)
 game.play()
 """
+model = BomberManModel()
+
+c = Controller.MainControleur()
+c.setModel(model)
 
 fenetre = View.OptionView()
 fenetre.start()
