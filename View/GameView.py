@@ -8,11 +8,16 @@ class GameView(): #Classe pour une Partie
     
     def __init__(self):
         pygame.init()
-        self.window_height = 300
-        self.window_width = 300
+        self.window_height = 500
+        self.window_width = 500
         self.window = pygame.display.set_mode((self.window_width,self.window_height))
         self.background = pygame.image.load("View/background.jpg")
+        self.background = pygame.transform.scale(self.background, (self.window_width,self.window_height))
+
         pygame.display.set_caption("Ma Fenêtre Pygame")
+
+        self.box_image = pygame.image.load('View/Box.png')
+        self.box_image = pygame.transform.scale(self.box_image, (465/15,465/15))
 
         self.game : Game = Game() #Permettera de changer la partie affiché
 
@@ -22,6 +27,7 @@ class GameView(): #Classe pour une Partie
             if event.type == pygame.QUIT:
                 return False
         self.clear()
+        self.update_boxes()
         self.update_player()
         pygame.display.update()
         return True
@@ -54,4 +60,10 @@ class GameView(): #Classe pour une Partie
                 if keys[pygame.K_d]:
                     if player.posX<=self.window_width:
                         player.moveTo(player.speed,0)
+
+    def update_boxes(self):
+        for box in self.game.boxes:
+            if not box.broken : 
+                self.window.blit(self.box_image, (box.x*(465/15),box.y*(465/15)))
+
 
