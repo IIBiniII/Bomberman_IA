@@ -14,3 +14,7 @@ class Player : #Essayer de le mettre dans Personnage.py
     def moveTo(self,x,y):
         self.posX += x
         self.posY += y
+    
+    def player_case(self)->(int,int) :
+        x,y= (self.posX-17)//(465/15),(self.posY-17)//(465/15)
+        return int(x),int(y)
