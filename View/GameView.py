@@ -57,21 +57,21 @@ class GameView(): #Classe pour une Partie
                 new_posY = player.posY - player.speed
                 if new_posY >= 0:
                     new_case_y = max(0, self.get_Case(player.posX,player.posY-player.speed)[1])
-                    if self.game.map.Carte[new_case_y][case_x] != 0 and not self.game.map.is_box_at(new_case_y, case_x):
+                    if self.game.map.Carte[new_case_y][case_x] != 0 and not self.game.map.is_box_at(case_x, new_case_y):
                         player.moveTo(0, -player.speed)
 
             if keys[pygame.K_s]:
                 new_posY = player.posY + player.speed
                 if new_posY <= self.window_height:
                     new_case_y = min(15, self.get_Case(player.posX,player.posY+player.speed)[1])
-                    if self.game.map.Carte[new_case_y][case_x] != 0 and not self.game.map.is_box_at(new_case_y, case_x):
+                    if self.game.map.Carte[new_case_y][case_x] != 0 and not self.game.map.is_box_at(case_x, new_case_y):
                         player.moveTo(0, player.speed)
 
             if keys[pygame.K_q]:
                 new_posX = player.posX - player.speed
                 if new_posX >= 0:
                     new_case_x = max(0, self.get_Case(player.posX-player.speed,player.posY)[0])
-                    if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(case_y, new_case_x):
+                    if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(new_case_x, case_y):
                         player.moveTo(-player.speed, 0)
 
             if keys[pygame.K_d]:
@@ -79,13 +79,21 @@ class GameView(): #Classe pour une Partie
                 if new_posX <= self.window_width:
                     new_case_x = min(15, self.get_Case(player.posX+player.speed,player.posY)[0])
 
-                    if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(case_y, new_case_x):
+                    if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(new_case_x, case_y):
                         player.moveTo(player.speed, 0)
+            if keys[pygame.K_SPACE]:
+                if player.last_move[1]<0:
+                    print("Placer bombe en Haut")
+                if player.last_move[1]>0:
+                    print("Placer bombe en Bas")
+                if player.last_move[0]<0:
+                    print("Placer bombe à Gauche")
+                if player.last_move[0]>0:
+                    print("Placer bombe à Droite")
 
-
-    def get_Case(self,posX,posY)->(int,int) :
-        x,y= (posX-17)//(465/15),(posY-17)//(465/15)
-        return int(x),int(y)
+    def get_Case(self, posX, posY) -> (int, int):
+        x, y = (posX - 17) / (465 / 15), (posY - 17) / (465 / 15)
+        return int(x), int(y)
     
     def update_boxes(self):
         for box in self.game.boxes:

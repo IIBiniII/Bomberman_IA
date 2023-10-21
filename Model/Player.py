@@ -11,9 +11,12 @@ class Player : #Essayer de le mettre dans Personnage.py
         self.angel_bonus_time = 0
         self.boot_bonus = 0 
 
+        self.last_move = [0,0]
+
     def moveTo(self,x,y):
         self.posX += x
         self.posY += y
+        self.last_move = [x,y]
     
     def player_case(self)->(int,int) :
         x,y= (self.posX-17)//(465/15),(self.posY-17)//(465/15)
