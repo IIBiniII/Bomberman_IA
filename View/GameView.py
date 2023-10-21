@@ -45,37 +45,47 @@ class GameView(): #Classe pour une Partie
 
     def update_player(self):
         for player in self.game.players:
-                police = pygame.font.SysFont("Arial",10)
-                text = police.render(player.name,True,"black")
-                self.window.blit(text,(player.posX - 10 ,player.posY - 20))
-                pygame.draw.circle(self.window,pygame.color.Color(0,200,50),(player.posX,player.posY),5,3)
-                keys = pygame.key.get_pressed()
+            police = pygame.font.SysFont("Arial", 10)
+            text = police.render(player.name, True, "black")
+            self.window.blit(text, (player.posX - 10, player.posY - 20))
+            pygame.draw.circle(self.window, pygame.color.Color(0, 200, 50), (player.posX, player.posY), 5, 3)
+            keys = pygame.key.get_pressed()
 
-                case_x,case_y = player.player_case() #Récupére les coordonés de la case actuel du joueur
-                
-                if keys[pygame.K_z]:
-                    if player.posY>0:
-                        if case_y > 0 and type(self.game.map.boxCarte[case_y-1][case_x]) == Box:
-                            if not self.game.map.boxCarte[case_y-1][case_x].willCollide(player,0,-player.speed):
-                                player.moveTo(0,-player.speed)
+            case_x, case_y = player.player_case()  # Récupérez les coordonnées de la case actuelle du joueur
 
-                if keys[pygame.K_s]:
-                    if player.posY<=self.window_height:
-                        if case_y < 15 and type(self.game.map.boxCarte[case_y+1][case_x]) == Box:
-                             if not self.game.map.boxCarte[case_y+1][case_x].willCollide(player,0,player.speed):
-                                player.moveTo(0,player.speed)
-                if keys[pygame.K_q]:
-                    if player.posX>0:
-                        if case_x > 0 and type(self.game.map.boxCarte[case_y][case_x-1]) == Box:
-                             if not self.game.map.boxCarte[case_y][case_x-1].willCollide(player,-player.speed,0):
-                                player.moveTo(-player.speed,0)
-                    
-                if keys[pygame.K_d]:
-                    if player.posX<=self.window_width:
-                        if case_x < 15 and type(self.game.map.boxCarte[case_y][case_x+1]) == Box:
-                            if not self.game.map.boxCarte[case_y][case_x+1].willCollide(player,player.speed,0):
-                                player.moveTo(player.speed,0)
+            if keys[pygame.K_z]:
+                new_posY = player.posY - player.speed
+                if new_posY >= 0:
+                    new_case_y = max(0, self.get_Case(player.posX,player.posY-player.speed)[1])
+                    if self.game.map.Carte[new_case_y][case_x] != 0 and not self.game.map.is_box_at(new_case_y, case_x):
+                        player.moveTo(0, -player.speed)
 
+            if keys[pygame.K_s]:
+                new_posY = player.posY + player.speed
+                if new_posY <= self.window_height:
+                    new_case_y = min(15, self.get_Case(player.posX,player.posY+player.speed)[1])
+                    if self.game.map.Carte[new_case_y][case_x] != 0 and not self.game.map.is_box_at(new_case_y, case_x):
+                        player.moveTo(0, player.speed)
+
+            if keys[pygame.K_q]:
+                new_posX = player.posX - player.speed
+                if new_posX >= 0:
+                    new_case_x = max(0, self.get_Case(player.posX-player.speed,player.posY)[0])
+                    if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(case_y, new_case_x):
+                        player.moveTo(-player.speed, 0)
+
+            if keys[pygame.K_d]:
+                new_posX = player.posX + player.speed
+                if new_posX <= self.window_width:
+                    new_case_x = min(15, self.get_Case(player.posX+player.speed,player.posY)[0])
+
+                    if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(case_y, new_case_x):
+                        player.moveTo(player.speed, 0)
+
+
+    def get_Case(self,posX,posY)->(int,int) :
+        x,y= (posX-17)//(465/15),(posY-17)//(465/15)
+        return int(x),int(y)
     
     def update_boxes(self):
         for box in self.game.boxes:

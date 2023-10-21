@@ -46,7 +46,10 @@ class Map:
             carteBox.append(ligneBox)
         return carteBox
 
-
+    def is_box_at(self,x,y):
+        if type(self.boxCarte[y][x])==Box:
+            return True
+        return False
 
 
 
