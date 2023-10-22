@@ -16,7 +16,7 @@ il faudrait séparer ces 2 parties
 
 à faire : 
 
--Dans l'interface graphique (Tkinter) ajouter la possibilité de lancer n parties d'affiler 
+-Dans l'interface graphique (Tkinter) ajouter la possibilité de lancer n parties d'affiler <br>
 -Et réussir à gérer les updates de chaques parties dans une boucle while (OptionView par exemple) 
 
     
