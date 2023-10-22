@@ -10,6 +10,8 @@ class Player : #Essayer de le mettre dans Personnage.py
         self.bomb_bonus = 0
         self.angel_bonus_time = 0
         self.boot_bonus = 0 
+        
+        self.bomb_place = 0
 
         self.last_move = [0,0]
 

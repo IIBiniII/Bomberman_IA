@@ -1,6 +1,8 @@
 from Model import Player
 from Model.Game import Game
 from Model.Box import Box
+from Model.Bomb import Bomb
+import time
 
 
 import pygame
@@ -31,6 +33,7 @@ class GameView(): #Classe pour une Partie
         self.clear()
         self.update_boxes()
         self.update_player()
+        self.update_bomb()
         pygame.display.update()
         return True
 
@@ -82,14 +85,34 @@ class GameView(): #Classe pour une Partie
                     if self.game.map.Carte[case_y][new_case_x] != 0 and not self.game.map.is_box_at(new_case_x, case_y):
                         player.moveTo(player.speed, 0)
             if keys[pygame.K_SPACE]:
-                if player.last_move[1]<0:
-                    print("Placer bombe en Haut")
-                if player.last_move[1]>0:
-                    print("Placer bombe en Bas")
-                if player.last_move[0]<0:
-                    print("Placer bombe à Gauche")
-                if player.last_move[0]>0:
-                    print("Placer bombe à Droite")
+                if player.bomb_place < 1+player.bomb_bonus:
+                    case_x, case_y = player.player_case()  # Récupérez les coordonnées de la case actuelle du joueur
+
+                    if player.last_move[1]<0:
+                        if self.game.map.Carte[case_y-1][case_x]==1:
+                            self.game.bombPlace.append(Bomb(player,caseX=case_x,caseY=case_y-1))
+                            player.bomb_place+=1
+
+                    if player.last_move[1]>0:
+                        if self.game.map.Carte[case_y+1][case_x]==1:
+                            self.game.bombPlace.append(Bomb(player,caseX=case_x,caseY=case_y+1))
+                            player.bomb_place+=1
+
+
+                    if player.last_move[0]<0:
+                        if self.game.map.Carte[case_y][case_x-1]==1:
+                            self.game.bombPlace.append(Bomb(player,caseX=case_x-1,caseY=case_y))
+                            player.bomb_place+=1
+
+
+                    if player.last_move[0]>0:
+                        if self.game.map.Carte[case_y][case_x+1]==1:
+                            self.game.bombPlace.append(Bomb(player,caseX=case_x+1,caseY=case_y))
+                            player.bomb_place+=1
+
+
+
+
 
     def get_Case(self, posX, posY) -> (int, int):
         x, y = (posX - 17) / (465 / 15), (posY - 17) / (465 / 15)
@@ -100,4 +123,11 @@ class GameView(): #Classe pour une Partie
             if not box.broken : 
                 self.window.blit(box.box_image, (box.x*(465/15)+17,box.y*(465/15)+17))
 
+    def update_bomb(self):
+        for bomb in self.game.bombPlace:
+            if time.mktime(time.localtime()) - time.mktime(bomb.time_place) >=3:
+                bomb.player.bomb_place -=1
+                self.game.bombPlace.remove(bomb)
+                continue
+            self.window.blit(bomb.bomb_image, (bomb.caseX*(465/15)+17,bomb.caseY*(465/15)+17))
 
