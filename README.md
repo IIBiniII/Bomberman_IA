@@ -8,7 +8,8 @@ Ce projet à pour but de créer une IA qui serait capable de jouer seul au cél�
 
 Notes : 
 
-Les déplacements des joueurs et le placement des bombes est actuellement gérer graphiquement
-Il faudrait réussir à le gérer grâce à game afin de pouvoir gérer plusieurs parties en même temps sans l'affichage graphique
+Dans la fonction update_bomb, on actualise l'affichage en même temps de gérer l'explosion de la bomb
+il faudrait séparer ces 2 parties 
+=> trouver un moyen de gérer l'affichage et le model dans la même fonction mais de pouvoir désactiver l'affichage (si c'est une game qui n'est pas afficher à l'ecran)
 
     
