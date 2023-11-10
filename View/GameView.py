@@ -28,7 +28,15 @@ class GameView(): #Classe pour une Partie
         ]
         self.imageGrass = pygame.transform.scale(pygame.image.load('Assets/Grass.png'), (465//15,465//15))
         
-
+        #Explosion
+        imageCenter = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionCenter.png'), (465//15,465//15))
+        imageInter = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionInterBottom.png'), (465//15,465//15))
+        imageEnd = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionEndBottom.png'), (465//15,465//15))
+        self.imageExplosion = [
+            imageCenter,
+            {"TOP" : pygame.transform.rotate(imageInter,180),"BOTTOM" : imageInter,"LEFT" : pygame.transform.rotate(imageInter,90),"RIGHT" : pygame.transform.rotate(imageInter,-90)},
+            {"TOP" : pygame.transform.rotate(imageEnd,180),"BOTTOM" : imageInter,"LEFT" : pygame.transform.rotate(imageEnd,90),"RIGHT" : pygame.transform.rotate(imageEnd,-90)}
+        ]
 
         self.game : Game = Game() #Permettera de changer la partie affiché
     
@@ -90,6 +98,13 @@ class GameView(): #Classe pour une Partie
                 valElement = self.game.map.Carte[y][x]
                 typeElement = type(valElement)
 
+                images = self.getImagesOfElement(self.game.map.Carte[y][x])
+                for image in images:
+                    self.window.blit(image,(x*(465/15)+17,y*(465/15)+17))
+                
+
+
+                ##update module
                 if typeElement == Elem.Bombe or typeElement == Elem.Explosion:
                     if typeElement == Elem.Bombe:
                         valElement : Elem.Bombe
@@ -105,11 +120,10 @@ class GameView(): #Classe pour une Partie
                         if valElement.Status == 0:
                             self.game.map.Carte[y][x] = Elem.Grass()
                         else:
+
                             image = self.imageBombe[0] # dois être une bombe
 
-                images = self.getImagesOfElement(self.game.map.Carte[y][x])
-                for image in images:
-                    self.window.blit(image,(x*(465/15)+17,y*(465/15)+17))
+                
 
 
     def getImagesOfElement(self,element):
@@ -127,9 +141,18 @@ class GameView(): #Classe pour une Partie
                 if typeElement == Elem.Bombe:
                     images.append(self.imageBombe[element.Status-1])
                 elif typeElement == Elem.Explosion:
-                    images.append(self.imageBombe[1])
-
+                    images.append(self.imageOfExplosion(element))
 
             return images
+    
+    def imageOfExplosion(self,explosion : Elem.Explosion):
+
+        if explosion.Puissance == explosion.powerMax:
+            return self.imageExplosion[0]
+        elif explosion.Puissance == 0:
+            return self.imageExplosion[2][explosion.Direction]
+        elif explosion.Puissance < explosion.powerMax:
+            return self.imageExplosion[1][explosion.Direction]
+    
 
 

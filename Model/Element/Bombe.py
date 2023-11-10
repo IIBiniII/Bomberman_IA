@@ -1,12 +1,14 @@
 import datetime
+from Model import *
 
 class Bombe():
     
-    def __init__(self,player,Puissance) -> None:
+    def __init__(self,player : Player) -> None:
         self.DateDeMort = datetime.datetime.now() + datetime.timedelta(seconds=3)
         self.Status = 3
         self.player = player
-        self.Puissance = Puissance
+        self.Puissance = player.fire_range
+        
 
     
     def checkStatus(self):

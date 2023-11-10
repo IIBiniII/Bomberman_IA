@@ -4,11 +4,12 @@ from Model.Element import Grass
 
 class Explosion:
     
-    def __init__(self,Puissance : int,Direction : str) -> None:
+    def __init__(self,Puissance : int,Direction : str,powerMax) -> None:
         self.DateDeMort = datetime.datetime.now() + datetime.timedelta(seconds=1)
         
         self.Puissance = Puissance
         self.Direction = Direction
+        self.powerMax = powerMax
 
         self.Status = 1
 

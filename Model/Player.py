@@ -10,33 +10,14 @@ class Player() : #Essayer de le mettre dans Personnage.py
         #Init of bonuses
         self.fire_range = 3
         self.fire_bonus = 0
-        #self.bomb_bonus = 0
         self.angel_bonus_time = 0
         self.boot_bonus = 0 
         
-        #self.bomb_place = 0
         self.bomb = 1
-        
-
-        self.last_move = [0,0]
-
-        #ajout
-        
+                
         self.coter = 20
         self.discretionSee : str = "TOP" 
 
-
-    """
-    def moveTo(self,x,y):
-        self.posX += x
-        self.posY += y
-        self.last_move = [x,y]
-    
-        
-    def player_case(self)->(int,int) :
-        x,y= (self.posX-17)//(465/15),(self.posY-17)//(465/15)
-        return int(x),int(y)
-    """
     
     def moveTo(self,direction : str):
         
@@ -74,8 +55,5 @@ class Player() : #Essayer de le mettre dans Personnage.py
                 pointx = tableauCoef[i]*moitierCoter+postions[0]
                 pointy = round(tableauCoef[j]*moitierCoter+postions[1],1)
                 listePoints[i*2+j] = (pointx,pointy)
-        #print("---------------")
-        #print(f"postion actuel, {self.posX},{self.posY}")
-        #print(f"Postion Future, {postions}")
-        #print(f"listepoints , {listePoints}")
+
         return listePoints
