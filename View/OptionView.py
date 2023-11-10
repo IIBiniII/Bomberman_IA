@@ -1,6 +1,7 @@
 from tkinter import *
 import View
-from View import GameView
+
+
 
 class OptionView(Tk):
 
@@ -10,7 +11,7 @@ class OptionView(Tk):
         super().__init__()
         self.geometry("500x500")
         self.runing = True
-        self.game : GameView = None
+        self.game : View.CopyGameView = None
         self.protocol("WM_DELETE_WINDOW", self.stop)
 
         self.page = View.Menu(self)

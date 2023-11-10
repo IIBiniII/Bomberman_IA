@@ -1,5 +1,4 @@
 from random import randint
-from Model.Box import Box
 import Model.Element as Elem
 
 class Map:
@@ -34,31 +33,8 @@ class Map:
                 if self.Carte[nul][nuc] == 1 and randint(0,100) <= 60:
                     if nul not in (1,2,10,11) or nuc not in (1,2,12,13):
                         self.Carte[nul][nuc] = 2
-                    
+           
     """
-    def carteCaisse(self):
-        carteBox = []
-        for numLigne in range(len(self.Carte)):
-            ligneBox = []
-            for numCol in  range(len(self.Carte[numLigne])): 
-                valCase = self.Carte[numLigne][numCol] #Récupère la valeur de la case associé de la mattrice self.Carte
-                if valCase == 0:
-                    ligneBox.append(Box(numCol,numLigne,False))
-                elif valCase == 2 :
-                    ligneBox.append(Box(numCol,numLigne,True))
-                else:
-                    ligneBox.append(0) 
-            carteBox.append(ligneBox)
-        return carteBox
-    """
-
-    def is_box_at(self,x,y):
-        if type(self.boxCarte[y][x])==Box:
-            return True
-        return False
-
-
-
     def afficher(self):
         
         text = ""
@@ -75,6 +51,8 @@ class Map:
             text+="\n"
         
         print(text)
+    """
+
     
     def convertNumberInObject(self):
 
