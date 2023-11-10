@@ -2,6 +2,7 @@ from View import GameView
 from Model import BomberManModel
 
 from Controller import *
+from View.CopyGameView import GameViewCopy
 
 class ControleurPlayBoutonMenu(MainControleur):
 
@@ -13,7 +14,7 @@ class ControleurPlayBoutonMenu(MainControleur):
     def OnAction(self,event):
 
         if not MainControleur.Model.gameRuning:
-            self.view.game = GameView()
+            self.view.game = GameViewCopy()#GameView()
             MainControleur.Model.gameRuning = True
         else:
             print("une partie est déja lancer")

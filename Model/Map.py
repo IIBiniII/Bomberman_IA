@@ -1,5 +1,6 @@
 from random import randint
 from Model.Box import Box
+import Model.Element as Elem
 
 class Map:
 
@@ -20,7 +21,12 @@ class Map:
                      [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                     ]
-        self.boxCarte = self.carteCaisse()              #Matrice utilisé pour les colision des joueurs
+        #self.CarteEvent = [ [None]*15 for i in range(13)]
+        self.placerCaisse()
+        #self.boxCarte = self.carteCaisse()          #Matrice utilisé pour les colision des joueurs
+        self.convertNumberInObject() # les nombre de vienne des object (ex : box)
+
+
     
     def placerCaisse(self):
         for nul in range(len(self.Carte)):
@@ -28,9 +34,8 @@ class Map:
                 if self.Carte[nul][nuc] == 1 and randint(0,100) <= 60:
                     if nul not in (1,2,10,11) or nuc not in (1,2,12,13):
                         self.Carte[nul][nuc] = 2
-        self.boxCarte = self.carteCaisse() #Mettre à jour la matrice de box
                     
-
+    """
     def carteCaisse(self):
         carteBox = []
         for numLigne in range(len(self.Carte)):
@@ -45,6 +50,7 @@ class Map:
                     ligneBox.append(0) 
             carteBox.append(ligneBox)
         return carteBox
+    """
 
     def is_box_at(self,x,y):
         if type(self.boxCarte[y][x])==Box:
@@ -69,9 +75,17 @@ class Map:
             text+="\n"
         
         print(text)
+    
+    def convertNumberInObject(self):
 
-"""
-m = Map()
-m.placerCaisse()
-m.afficher()
-"""
+        longeur = len(self.Carte)
+        largeur = len(self.Carte[0])
+
+        for l in range(longeur):
+            for c in range(largeur):
+                if self.Carte[l][c] == 0:
+                    self.Carte[l][c] = Elem.BoxIncassable()
+                elif self.Carte[l][c] == 1:
+                    self.Carte[l][c] = Elem.Grass()
+                elif self.Carte[l][c] == 2:
+                    self.Carte[l][c] = Elem.Box()

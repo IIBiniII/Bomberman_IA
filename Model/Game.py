@@ -9,6 +9,7 @@ class Game: #Classe pour une Partie
         self.map :Map = Map()
         self.map.placerCaisse()
 
+        #placement des boite
         self.boxes = []
         for y in range(len(self.map.Carte)):
             for x in range(len(self.map.Carte[y])) :

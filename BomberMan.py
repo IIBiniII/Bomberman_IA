@@ -13,6 +13,7 @@ player1 = Player("Bertrand")
 game.add_player(player1)
 game.play()
 """
+
 model = BomberManModel()
 
 c = Controller.MainControleur()

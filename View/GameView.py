@@ -111,9 +111,6 @@ class GameView(): #Classe pour une Partie
                             player.bomb_place+=1
 
 
-
-
-
     def get_Case(self, posX, posY) -> (int, int):
         x, y = (posX - 17) / (465 / 15), (posY - 17) / (465 / 15)
         return int(x), int(y)
@@ -125,7 +122,7 @@ class GameView(): #Classe pour une Partie
 
     def update_bomb(self):
         for bomb in self.game.bombPlace:
-            if time.mktime(time.localtime()) - time.mktime(bomb.time_place) >=3:
+            if time.mktime(time.localtime()) - time.mktime(bomb.time_place) >= 3:
                 bomb.player.bomb_place -=1
                 self.game.bombPlace.remove(bomb)
                 continue
