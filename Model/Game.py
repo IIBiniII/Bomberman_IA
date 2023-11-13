@@ -72,7 +72,7 @@ class Game(): #Classe pour une Partie
                 self.map.Carte[playerCase[1]+vecteurDicetion[1]][playerCase[0]+vecteurDicetion[0]] = Elem.Bombe(player)
             #2ème potion : on la place ou il est
             else:
-                self.map.Carte[playerCase[1]][playerCase[0]] = Elem.Bombe(player, player.fire_range)
+                self.map.Carte[playerCase[1]][playerCase[0]] = Elem.Bombe(player)
 
 
             player.bomb -= 1

@@ -19,23 +19,31 @@ class GameView(): #Classe pour une Partie
 
         pygame.display.set_caption("Ma Fenêtre Pygame")
 
-        self.imageBoxIncassable = pygame.transform.scale(pygame.image.load('Assets/BoxIncassable.png'), (465//15,465//15))
-        self.imageBox = pygame.transform.scale(pygame.image.load('Assets/Box.png'), (465//15,465//15))
+        dimension = (465//15,465//15)
+
+        self.imageBoxIncassable = pygame.transform.scale(pygame.image.load('Assets/BoxIncassable.png'), dimension)
+        self.imageBox = pygame.transform.scale(pygame.image.load('Assets/Box.png'), dimension)
         self.imageBombe = [
-            pygame.transform.scale(pygame.image.load('Assets/bombes/BombeRouge3.png'), (465//15,465//15)),
-            pygame.transform.scale(pygame.image.load('Assets/bombes/BombeRouge2.png'), (465//15,465//15)),
-            pygame.transform.scale(pygame.image.load('Assets/bombes/BombeRouge1.png'), (465//15,465//15)),
+            pygame.transform.scale(pygame.image.load('Assets/bombes/BombeRouge3.png'), dimension),
+            pygame.transform.scale(pygame.image.load('Assets/bombes/BombeRouge2.png'), dimension),
+            pygame.transform.scale(pygame.image.load('Assets/bombes/BombeRouge1.png'), dimension),
         ]
-        self.imageGrass = pygame.transform.scale(pygame.image.load('Assets/Grass.png'), (465//15,465//15))
+        self.imageGrass = pygame.transform.scale(pygame.image.load('Assets/Grass.png'), dimension)
         
         #Explosion
-        imageCenter = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionCenter.png'), (465//15,465//15))
-        imageInter = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionInterBottom.png'), (465//15,465//15))
-        imageEnd = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionEndBottom.png'), (465//15,465//15))
+        imageCenter = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionCenter.png'), dimension)
+        imageInter = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionInterBottom.png'), dimension)
+        imageEnd = pygame.transform.scale(pygame.image.load('Assets/bombes/ExplosionEndBottom.png'), dimension)
         self.imageExplosion = [
             imageCenter,
             {"TOP" : pygame.transform.rotate(imageInter,180),"BOTTOM" : imageInter,"LEFT" : pygame.transform.rotate(imageInter,90),"RIGHT" : pygame.transform.rotate(imageInter,-90)},
             {"TOP" : pygame.transform.rotate(imageEnd,180),"BOTTOM" : imageInter,"LEFT" : pygame.transform.rotate(imageEnd,90),"RIGHT" : pygame.transform.rotate(imageEnd,-90)}
+        ]
+
+        self.imageBonnus = [
+            pygame.transform.scale(pygame.image.load('Assets/Bonnus/BonnusBombe.png'), (465//15,465//15)),
+            pygame.transform.scale(pygame.image.load('Assets/Bonnus/BonnusFeu.png'), (465//15,465//15)),
+            pygame.transform.scale(pygame.image.load('Assets/Bonnus/BonnusVitesse.png'), (465//15,465//15))
         ]
 
         self.game : Game = Game() #Permettera de changer la partie affiché
@@ -128,6 +136,7 @@ class GameView(): #Classe pour une Partie
 
     def getImagesOfElement(self,element):
             typeElement = type(element)
+
             images = []
             if typeElement == Elem.BoxIncassable :
                 images.append(self.imageBoxIncassable)
@@ -135,6 +144,14 @@ class GameView(): #Classe pour une Partie
                 images.append(self.imageGrass)
             elif typeElement == Elem.Box:
                 images.append(self.imageBox)
+            elif typeElement == Elem.BonnusBombe or typeElement == Elem.BonnusFeu or typeElement == Elem.BonnusVitesse:
+                if typeElement == Elem.BonnusBombe:
+                    images.append(self.imageBonnus[0])
+                elif typeElement == Elem.BonnusFeu:
+                    images.append(self.imageBonnus[1])
+                elif typeElement == Elem.BonnusVitesse:
+                    images.append(self.imageBonnus[2])
+            
             elif typeElement == Elem.Bombe or typeElement == Elem.Explosion:
                 images.append(self.imageGrass)
 
